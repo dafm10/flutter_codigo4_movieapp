@@ -21,7 +21,6 @@ class APIServices {
           .toList();
       return movies;
       // 1er enlace base: http://image.tmdb.org/t/p/w500/
-      // print(myMap.runtimeType);
     }
     return movies;
   }

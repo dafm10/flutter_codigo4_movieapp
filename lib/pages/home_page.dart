@@ -2,9 +2,9 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_codigo4_movieapp/models/movies_model.dart';
+import 'package:flutter_codigo4_movieapp/pages/movie_detail_page.dart';
 import 'package:flutter_codigo4_movieapp/services/api_services.dart';
 import 'package:flutter_codigo4_movieapp/ui/widgets/item_movie_list_widget.dart';
-import 'package:flutter_codigo4_movieapp/utils/constants.dart';
 import 'package:http/http.dart' as http;
 
 class HomePage extends StatefulWidget {
@@ -17,7 +17,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   List movies = [];
   List<MovieModel> moviesFinal = [];
-  APIServices _apiServices = APIServices();
+  final APIServices _apiServices = APIServices();
 
   @override
   void initState() {
@@ -50,7 +50,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xff18162E),
+      backgroundColor: const Color(0xff18162E),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
@@ -73,27 +73,36 @@ class _HomePageState extends State<HomePage> {
                 ),
                 FutureBuilder(
                   future: _apiServices.getMovieList(),
-                  builder: (BuildContext context, AsyncSnapshot snap){
-                    if(snap.hasData){
+                  builder: (BuildContext context, AsyncSnapshot snap) {
+                    if (snap.hasData) {
                       List<MovieModel> listMovie = snap.data;
                       return ListView.builder(
                         itemCount: listMovie.length,
                         shrinkWrap: true,
-                        physics: BouncingScrollPhysics(),
-                        itemBuilder: (BuildContext context, int index){
+                        physics: const BouncingScrollPhysics(),
+                        itemBuilder: (BuildContext context, int index) {
                           return ItemMovieListWidget(
-                              title: listMovie[index].title,
-                              releaseDate: listMovie[index].releaseDate,
-                              voteAverage: listMovie[index].voteAverage.toString(),
-                              overview: listMovie[index].overview,
-                              img: listMovie[index].img);
+                            title: listMovie[index].title,
+                            releaseDate: listMovie[index].releaseDate,
+                            voteAverage: listMovie[index].voteAverage.toString(),
+                            overview: listMovie[index].overview,
+                            img: listMovie[index].img,
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => MovieDetailPage(),
+                                ),
+                              );
+                            },
+                          );
                         },
                       );
                     }
                     return const CircularProgressIndicator();
                   },
                 ),
-               /* ListView.builder(
+                /* ListView.builder(
                   itemCount: moviesFinal.length,
                   physics: BouncingScrollPhysics(),
                   shrinkWrap: true,
