@@ -30,12 +30,17 @@ class _HomePageState extends State<HomePage> {
     http.Response response = await http.get(_uri);
 
     if (response.statusCode == 200) {
-      print(response.body);
+      // decodificamos el String a Mapa por que el servicio es un Mapa
+      Map<String, dynamic> myMap = json.decode(response.body);
+      movies = myMap["results"];
+      setState(() {
+
+      });
+    // 1er enlace base: http://image.tmdb.org/t/p/w500/
+      // print(myMap.runtimeType);
     } else {
       print("pasó algo");
     }
-    //Map<String, dynamic> myMap = json.decode(response.body);
-
     /* moviesList = myMap["movies"]
         .map<MoviestModel>((item) => MoviestModel.fromJson(item))
         .toList();
@@ -67,9 +72,20 @@ class _HomePageState extends State<HomePage> {
                 const SizedBox(
                   height: 20.0,
                 ),
-                ItemMovieListWidget(),
-                ItemMovieListWidget(),
-                ItemMovieListWidget(),
+                ListView.builder(
+                  itemCount: movies.length,
+                  physics: BouncingScrollPhysics(),
+                  shrinkWrap: true,
+                  itemBuilder: (BuildContext context, int index) {
+                    return ItemMovieListWidget(
+                      title: movies[index]["original_title"],
+                      releaseDate: movies[index]["release_date"],
+                      voteAverage: movies[index]["vote_average"].toString(),
+                      overview: movies[index]["overview"],
+                      img: movies[index]["poster_path"],
+                    );
+                  },
+                ),
               ],
             ),
           ),
