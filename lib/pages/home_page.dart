@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_codigo4_movieapp/models/movies_model.dart';
+import 'package:flutter_codigo4_movieapp/services/api_services.dart';
 import 'package:flutter_codigo4_movieapp/ui/widgets/item_movie_list_widget.dart';
 import 'package:flutter_codigo4_movieapp/utils/constants.dart';
 import 'package:http/http.dart' as http;
@@ -16,15 +17,16 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   List movies = [];
   List<MovieModel> moviesFinal = [];
+  APIServices _apiServices = APIServices();
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    getData();
+    //getData();
   }
 
-  getData() async {
+  /*getData() async {
     String path =
         "$pathProduction/discover/movie?api_key=$apiKEY";
     Uri _uri = Uri.parse(path);
@@ -43,7 +45,7 @@ class _HomePageState extends State<HomePage> {
       print("pasó algo");
     }
 
-  }
+  }*/
 
   @override
   Widget build(BuildContext context) {
@@ -59,7 +61,7 @@ class _HomePageState extends State<HomePage> {
                 const SizedBox(
                   height: 20.0,
                 ),
-                Text(
+                const Text(
                   "Movies",
                   style: TextStyle(
                     fontSize: 30.0,
@@ -69,7 +71,29 @@ class _HomePageState extends State<HomePage> {
                 const SizedBox(
                   height: 20.0,
                 ),
-                ListView.builder(
+                FutureBuilder(
+                  future: _apiServices.getMovieList(),
+                  builder: (BuildContext context, AsyncSnapshot snap){
+                    if(snap.hasData){
+                      List<MovieModel> listMovie = snap.data;
+                      return ListView.builder(
+                        itemCount: listMovie.length,
+                        shrinkWrap: true,
+                        physics: BouncingScrollPhysics(),
+                        itemBuilder: (BuildContext context, int index){
+                          return ItemMovieListWidget(
+                              title: listMovie[index].title,
+                              releaseDate: listMovie[index].releaseDate,
+                              voteAverage: listMovie[index].voteAverage.toString(),
+                              overview: listMovie[index].overview,
+                              img: listMovie[index].img);
+                        },
+                      );
+                    }
+                    return const CircularProgressIndicator();
+                  },
+                ),
+               /* ListView.builder(
                   itemCount: moviesFinal.length,
                   physics: BouncingScrollPhysics(),
                   shrinkWrap: true,
@@ -82,7 +106,7 @@ class _HomePageState extends State<HomePage> {
                       img: moviesFinal[index].img,
                     );
                   },
-                ),
+                ),*/
               ],
             ),
           ),
