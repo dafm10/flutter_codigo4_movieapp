@@ -20,6 +20,7 @@ class ItemMovieListWidget extends StatelessWidget {
     return Container(
       height: 420,
       margin: const EdgeInsets.symmetric(vertical: 16.0),
+      padding: const EdgeInsets.symmetric(horizontal: 8.0),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(24.0),
         image: DecorationImage(
