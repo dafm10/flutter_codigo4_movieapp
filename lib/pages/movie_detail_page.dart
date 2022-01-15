@@ -46,29 +46,42 @@ class MovieDetailPage extends StatelessWidget {
           SliverList(
             delegate: SliverChildListDelegate(
               [
-                Container(
-                  color: Colors.redAccent,
-                  height: 200.0,
-                ),
-                Container(
-                  color: Colors.yellowAccent,
-                  height: 200.0,
-                ),
-                Container(
-                  color: Colors.blueAccent,
-                  height: 200.0,
-                ),
-                Container(
-                  color: Colors.redAccent,
-                  height: 200.0,
-                ),
-                Container(
-                  color: Colors.yellowAccent,
-                  height: 200.0,
-                ),
-                Container(
-                  color: Colors.blueAccent,
-                  height: 200.0,
+                Row(
+                  children: [
+                    Container(
+                      width: 130.0,
+                      height: 180.0,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10.0),
+                        image: DecorationImage(
+                          fit: BoxFit.cover,
+                          image: NetworkImage(
+                            "https://images.pexels.com/photos/5794243/pexels-photo-5794243.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
+                          ),
+                        ),
+                      ),
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "2020-10-12",
+                          style: TextStyle(
+                            fontSize: 12.0,
+                            fontWeight: FontWeight.w400,
+                            color: Colors.white70,
+                          ),
+                        ),
+                        Text(
+                          "Justice League",
+                          style: TextStyle(
+                            fontSize: 16.0,
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
               ],
             ),
