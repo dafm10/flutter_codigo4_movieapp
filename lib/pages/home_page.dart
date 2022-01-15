@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_codigo4_movieapp/models/movies_model.dart';
 import 'package:flutter_codigo4_movieapp/ui/widgets/item_movie_list_widget.dart';
+import 'package:flutter_codigo4_movieapp/utils/constants.dart';
 import 'package:http/http.dart' as http;
 
 class HomePage extends StatefulWidget {
@@ -14,7 +15,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   List movies = [];
-  List<MoviestModel> moviesList = [];
+  List<MovieModel> moviesFinal = [];
 
   @override
   void initState() {
@@ -25,27 +26,23 @@ class _HomePageState extends State<HomePage> {
 
   getData() async {
     String path =
-        "https://api.themoviedb.org/3/discover/movie?api_key=e1b2f4eca9a8bce2bf87e5206ede8cba&language=es-ES";
+        "$pathProduction/discover/movie?api_key=$apiKEY";
     Uri _uri = Uri.parse(path);
     http.Response response = await http.get(_uri);
 
     if (response.statusCode == 200) {
       // decodificamos el String a Mapa por que el servicio es un Mapa
       Map<String, dynamic> myMap = json.decode(response.body);
-      movies = myMap["results"];
-      setState(() {
-
-      });
-    // 1er enlace base: http://image.tmdb.org/t/p/w500/
+      moviesFinal = myMap["results"]
+          .map<MovieModel>((item) => MovieModel.fromJson(item))
+          .toList();
+      setState(() {});
+      // 1er enlace base: http://image.tmdb.org/t/p/w500/
       // print(myMap.runtimeType);
     } else {
       print("pasó algo");
     }
-    /* moviesList = myMap["movies"]
-        .map<MoviestModel>((item) => MoviestModel.fromJson(item))
-        .toList();
 
-    setState(() {});*/
   }
 
   @override
@@ -73,16 +70,16 @@ class _HomePageState extends State<HomePage> {
                   height: 20.0,
                 ),
                 ListView.builder(
-                  itemCount: movies.length,
+                  itemCount: moviesFinal.length,
                   physics: BouncingScrollPhysics(),
                   shrinkWrap: true,
                   itemBuilder: (BuildContext context, int index) {
                     return ItemMovieListWidget(
-                      title: movies[index]["original_title"],
-                      releaseDate: movies[index]["release_date"],
-                      voteAverage: movies[index]["vote_average"].toString(),
-                      overview: movies[index]["overview"],
-                      img: movies[index]["poster_path"],
+                      title: moviesFinal[index].title,
+                      releaseDate: moviesFinal[index].releaseDate,
+                      voteAverage: moviesFinal[index].voteAverage.toString(),
+                      overview: moviesFinal[index].overview,
+                      img: moviesFinal[index].img,
                     );
                   },
                 ),
@@ -94,4 +91,3 @@ class _HomePageState extends State<HomePage> {
     );
   }
 }
-

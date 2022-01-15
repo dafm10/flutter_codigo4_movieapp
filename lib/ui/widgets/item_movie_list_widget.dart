@@ -26,7 +26,7 @@ class ItemMovieListWidget extends StatelessWidget {
         image: DecorationImage(
           fit: BoxFit.cover,
           image: NetworkImage(
-            "http://image.tmdb.org/t/p/w500/$img",
+            "http://image.tmdb.org/t/p/w500$img",
           ),
         ),
       ),
