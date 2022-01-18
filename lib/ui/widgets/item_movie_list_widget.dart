@@ -41,7 +41,7 @@ class ItemMovieListWidget extends StatelessWidget {
             Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(24.0),
-                gradient: LinearGradient(
+                gradient: const LinearGradient(
                   begin: Alignment.bottomCenter,
                   end: Alignment(0, 0.2),
                   colors: [
@@ -65,7 +65,7 @@ class ItemMovieListWidget extends StatelessWidget {
                         children: [
                           Text(
                             title,
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 22.0,
                               fontWeight: FontWeight.w600,
                             ),
@@ -78,7 +78,7 @@ class ItemMovieListWidget extends StatelessWidget {
                             children: [
                               Row(
                                 children: [
-                                  Icon(
+                                  const Icon(
                                     Icons.calendar_today,
                                     color: Colors.white,
                                     size: 14.0,
@@ -88,7 +88,7 @@ class ItemMovieListWidget extends StatelessWidget {
                                   ),
                                   Text(
                                     releaseDate,
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                       fontSize: 12.0,
                                     ),
                                   ),
@@ -96,7 +96,7 @@ class ItemMovieListWidget extends StatelessWidget {
                               ),
                               Row(
                                 children: [
-                                  Icon(
+                                  const Icon(
                                     Icons.star,
                                     color: Colors.yellow,
                                     size: 14.0,
@@ -106,7 +106,7 @@ class ItemMovieListWidget extends StatelessWidget {
                                   ),
                                   Text(
                                     voteAverage,
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                       fontSize: 12.0,
                                     ),
                                   ),
@@ -121,7 +121,7 @@ class ItemMovieListWidget extends StatelessWidget {
                             overview,
                             maxLines: 3,
                             overflow: TextOverflow.ellipsis,
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 13.0,
                               fontWeight: FontWeight.w400,
                             ),
