@@ -180,46 +180,16 @@ class MovieDetailPage extends StatelessWidget {
                               color: Colors.white70, fontSize: 15.0),
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.all(16.0),
+                      const Padding(
+                        padding: EdgeInsets.all(16.0),
                         child: Text("Genres"),
                       ),
-                      Wrap(
-                        spacing: 8.0,
-                        children: [
-                          Chip(
-                            label: Text(
-                              "Horror",
-                            ),
-                          ),
-                          Chip(
-                            label: Text(
-                              "Horror adandas djas",
-                            ),
-                          ),
-                          Chip(
-                            label: Text(
-                              "Horror",
-                            ),
-                          ),
-                          Chip(
-                            label: Text(
-                              "Horror ajsdajsdasjd ",
-                            ),
-                          ),
-                          Chip(
-                            label: Text(
-                              "Horror ajsdajsdasjd ",
-                            ),
-                          ),
-                          Chip(
-                            label: Text(
-                              "Horror ajsdajsdasjd ",
-                            ),
-                          ),
-
-
-                        ],
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                        child: Wrap(
+                          spacing: 8.0,
+                          children: movie.genres.map<Widget>((e) => Chip(label: Text(e["name"]))).toList(),
+                        ),
                       ),
                       Padding(
                         padding: const EdgeInsets.all(16.0),
@@ -247,7 +217,7 @@ class MovieDetailPage extends StatelessWidget {
               ],
             );
           }
-          return Center(
+          return const Center(
             child: CircularProgressIndicator(),
           );
         },

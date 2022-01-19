@@ -1,4 +1,3 @@
-
 class MovieModel {
 
   int id;
@@ -11,6 +10,7 @@ class MovieModel {
   int runtime;
   String status;
   String homePage;
+  List<Map<String, dynamic>> genres;
 
   MovieModel({
     required this.id,
@@ -23,6 +23,7 @@ class MovieModel {
     required this.runtime,
     required this.status,
     required this.homePage,
+    required this.genres
   });
 
   factory MovieModel.fromJson(Map<String, dynamic> json) => MovieModel(
@@ -36,6 +37,7 @@ class MovieModel {
     backdropPath: json["backdrop_path"],
     status: json["status"] ?? "",
     homePage: json["homepage"] ?? "",
+    genres: json["genres"] != null ? List<Map<String, dynamic>>.from(json["genres"].map((item)=>item)) : [],
   );
 
   Map<String, dynamic> toJson() => {
@@ -49,5 +51,6 @@ class MovieModel {
     "backdrop_path": backdropPath,
     "status": status,
     "homepage": homePage,
+    "genres": List<dynamic>.from(genres.map((e) => e)),
   };
 }

@@ -44,6 +44,7 @@ class APIServices {
       backdropPath: "",
       status: "",
       homePage: "",
+      genres: [],
     );
   }
 }
