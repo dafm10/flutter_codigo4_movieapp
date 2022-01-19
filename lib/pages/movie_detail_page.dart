@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter_codigo4_movieapp/models/movies_model.dart';
 import 'package:flutter_codigo4_movieapp/services/api_services.dart';
@@ -181,16 +182,56 @@ class MovieDetailPage extends StatelessWidget {
                       ),
                       Padding(
                         padding: const EdgeInsets.all(16.0),
+                        child: Text("Genres"),
+                      ),
+                      Wrap(
+                        spacing: 8.0,
+                        children: [
+                          Chip(
+                            label: Text(
+                              "Horror",
+                            ),
+                          ),
+                          Chip(
+                            label: Text(
+                              "Horror adandas djas",
+                            ),
+                          ),
+                          Chip(
+                            label: Text(
+                              "Horror",
+                            ),
+                          ),
+                          Chip(
+                            label: Text(
+                              "Horror ajsdajsdasjd ",
+                            ),
+                          ),
+                          Chip(
+                            label: Text(
+                              "Horror ajsdajsdasjd ",
+                            ),
+                          ),
+                          Chip(
+                            label: Text(
+                              "Horror ajsdajsdasjd ",
+                            ),
+                          ),
+
+
+                        ],
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(16.0),
                         child: ElevatedButton.icon(
                           onPressed: () async {
                             await launch(movie.homePage);
                           },
                           style: ElevatedButton.styleFrom(
-                            primary: Color(0xffef476f),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(30.0),
-                            )
-                          ),
+                              primary: Color(0xffef476f),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(30.0),
+                              )),
                           icon: Icon(Icons.pages_sharp),
                           label: Container(
                             margin: const EdgeInsets.symmetric(vertical: 14.0),
