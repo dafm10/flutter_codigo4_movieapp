@@ -38,8 +38,12 @@ class APIServices {
       title: "",
       releaseDate: "",
       voteAverage: 0,
+      runtime: 0,
       overview: "",
       img: "",
+      backdropPath: "",
+      status: "",
+      homePage: "",
     );
   }
 }
