@@ -1,5 +1,5 @@
-
 import 'package:flutter/material.dart';
+import 'package:flutter_codigo4_movieapp/models/actor_model.dart';
 import 'package:flutter_codigo4_movieapp/models/movies_model.dart';
 import 'package:flutter_codigo4_movieapp/services/api_services.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -188,8 +188,71 @@ class MovieDetailPage extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(horizontal: 16.0),
                         child: Wrap(
                           spacing: 8.0,
-                          children: movie.genres.map<Widget>((e) => Chip(label: Text(e["name"]))).toList(),
+                          children: movie.genres
+                              .map<Widget>((e) => Chip(label: Text(e["name"])))
+                              .toList(),
                         ),
+                      ),
+                      SizedBox(height: 10.0,),
+                      const Padding(
+                        padding: EdgeInsets.all(16.0),
+                        child: Text("Cast"),
+                      ),
+                      FutureBuilder(
+                        future: _apiServices.getCastList(id),
+                        builder: (BuildContext context, AsyncSnapshot snap) {
+                          if (snap.hasData) {
+                            List<ActorModel> actoList = snap.data;
+                            return SingleChildScrollView(
+                              scrollDirection: Axis.horizontal,
+                              child: Row(
+                                children: actoList
+                                    .map(
+                                      (e) => Container(
+                                        padding: const EdgeInsets.all(16.0),
+                                        child: Column(
+                                          children: [
+                                            Container(
+                                              height: 100.0,
+                                              width: 100.0,
+                                              decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(
+                                                        60.0),
+                                                image: DecorationImage(
+                                                  image: e.profilePath != ""
+                                                      ? NetworkImage(
+                                                          "http://image.tmdb.org/t/p/w500${e.profilePath}")
+                                                      : const NetworkImage(
+                                                          "https://rrtltz.com/assets/images/team/placeholder.jpeg"),
+                                                  fit: BoxFit.cover,
+                                                ),
+                                              ),
+                                            ),
+                                            const SizedBox(height: 6.0,),
+                                            Text(
+                                              e.name,
+                                              maxLines: 2,
+                                              style: const TextStyle(
+                                                fontSize: 12.0,
+                                                color: Colors.white70,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    )
+                                    .toList(),
+                              ),
+                            );
+                          }
+                          return Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        },
+                      ),
+                      const SizedBox(
+                        height: 20.0,
                       ),
                       Padding(
                         padding: const EdgeInsets.all(16.0),
