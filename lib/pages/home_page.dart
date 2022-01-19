@@ -91,7 +91,9 @@ class _HomePageState extends State<HomePage> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => MovieDetailPage(),
+                                  builder: (context) => MovieDetailPage(
+                                    id: listMovie[index].id,
+                                  ),
                                 ),
                               );
                             },

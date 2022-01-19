@@ -1,8 +1,10 @@
-
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class MovieDetailPage extends StatelessWidget {
-  const MovieDetailPage({Key? key}) : super(key: key);
+
+  int id;
+  MovieDetailPage({required this.id});
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +21,18 @@ class MovieDetailPage extends StatelessWidget {
             snap: false,
             pinned: true,
             flexibleSpace: FlexibleSpaceBar(
-              title: Text("Movies"),
+              title: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                child: Text(
+                  "Movies",
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  textAlign: TextAlign.center,
+                  style: GoogleFonts.montserrat(
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ),
               background: Stack(
                 fit: StackFit.expand,
                 children: [
@@ -64,94 +77,96 @@ class MovieDetailPage extends StatelessWidget {
                           ),
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.all(14.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "2020-10-12",
-                              style: TextStyle(
-                                fontSize: 12.0,
-                                fontWeight: FontWeight.w400,
-                                color: Colors.white70,
-                              ),
-                            ),
-                            Text(
-                              "Justice League",
-                              style: TextStyle(
-                                fontSize: 16.0,
-                                fontWeight: FontWeight.w700,
-                              ),
-                            ),
-                            Text(
-                              "Released",
-                              style: TextStyle(
-                                fontSize: 12.0,
-                                fontWeight: FontWeight.w400,
-                                color: Colors.white70,
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 4.0,
-                            ),
-                            Row(
-                              children: [
-                                Icon(
-                                  Icons.timer,
+                      Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.all(14.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                "2020-10-12",
+                                style: TextStyle(
+                                  fontSize: 12.0,
+                                  fontWeight: FontWeight.w400,
                                   color: Colors.white70,
-                                  size: 14,
                                 ),
-                                const SizedBox(
-                                  width: 4.0,
+                              ),
+                              Text(
+                                "Justice League",
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
+                                style: TextStyle(
+                                  fontSize: 16.0,
+                                  fontWeight: FontWeight.w700,
                                 ),
-                                Text(
-                                  "140 min.",
-                                  style: TextStyle(
-                                    fontSize: 12.0,
-                                    fontWeight: FontWeight.w400,
-                                    color: Colors.white70,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            const SizedBox(
-                              height: 4.0,
-                            ),
-                            Row(
-                              children: [
-                                Icon(
-                                  Icons.star,
+                              ),
+                              Text(
+                                "Released",
+                                style: TextStyle(
+                                  fontSize: 12.0,
+                                  fontWeight: FontWeight.w400,
                                   color: Colors.white70,
-                                  size: 14,
                                 ),
-                                const SizedBox(
-                                  width: 4.0,
-                                ),
-                                Text(
-                                  "134",
-                                  style: TextStyle(
-                                    fontSize: 12.0,
-                                    fontWeight: FontWeight.w400,
+                              ),
+                              const SizedBox(
+                                height: 4.0,
+                              ),
+                              Row(
+                                children: [
+                                  Icon(
+                                    Icons.timer,
                                     color: Colors.white70,
+                                    size: 14,
                                   ),
-                                ),
-                              ],
-                            ),
-                          ],
+                                  const SizedBox(
+                                    width: 4.0,
+                                  ),
+                                  Text(
+                                    "140 min.",
+                                    style: TextStyle(
+                                      fontSize: 12.0,
+                                      fontWeight: FontWeight.w400,
+                                      color: Colors.white70,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(
+                                height: 4.0,
+                              ),
+                              Row(
+                                children: [
+                                  Icon(
+                                    Icons.star,
+                                    color: Colors.white70,
+                                    size: 14,
+                                  ),
+                                  const SizedBox(
+                                    width: 4.0,
+                                  ),
+                                  Text(
+                                    "134",
+                                    style: TextStyle(
+                                      fontSize: 12.0,
+                                      fontWeight: FontWeight.w400,
+                                      color: Colors.white70,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ],
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 20.0, vertical: 10.0),
                   child: Text(
                     "The Eternals are a team of ancient aliens who have been living on Earth in secret for thousands of years. When an unexpected tragedy forces them out of the shadows, they are forced to reunite against mankind’s most ancient enemy, the Deviants.",
-                    style: TextStyle(
-                      color: Colors.white70,
-                      fontSize: 15.0
-                    ),
+                    style: TextStyle(color: Colors.white70, fontSize: 15.0),
                   ),
                 ),
               ],
