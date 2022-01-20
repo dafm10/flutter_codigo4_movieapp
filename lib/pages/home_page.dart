@@ -17,11 +17,19 @@ class _HomePageState extends State<HomePage> {
   List movies = [];
   List<MovieModel> moviesFinal = [];
   final APIServices _apiServices = APIServices();
+  ScrollController _scrollController = ScrollController();
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+    _scrollController.addListener(() {
+      print(_scrollController.position.pixels);
+      print("dsdadadsfdsfd ${_scrollController.position.maxScrollExtent}");
+      if(_scrollController.position.pixels == _scrollController.position.maxScrollExtent){
+        print("Estamos en el final de la página");
+      }
+    });
     //getData();
   }
 
@@ -52,6 +60,7 @@ class _HomePageState extends State<HomePage> {
       backgroundColor: const Color(0xff18162E),
       body: SafeArea(
         child: SingleChildScrollView(
+          controller: _scrollController,
           child: Padding(
             padding: const EdgeInsets.all(16.0),
             child: Column(

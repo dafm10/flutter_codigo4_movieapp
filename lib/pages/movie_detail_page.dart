@@ -204,12 +204,13 @@ class MovieDetailPage extends StatelessWidget {
                           if (snap.hasData) {
                             List<ActorModel> actoList = snap.data;
                             return SingleChildScrollView(
+                              physics: BouncingScrollPhysics(),
                               scrollDirection: Axis.horizontal,
                               child: Row(
                                 children: actoList
                                     .map(
                                       (e) => Container(
-                                        padding: const EdgeInsets.all(16.0),
+                                        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 0.0),
                                         child: Column(
                                           children: [
                                             Container(

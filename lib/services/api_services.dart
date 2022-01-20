@@ -8,7 +8,7 @@ import 'package:http/http.dart' as http;
 class APIServices {
   Future<List<MovieModel>> getMovieList() async {
     List<MovieModel> movies = [];
-    String path = "$pathProduction/discover/movie?api_key=$apiKEY";
+    String path = "$pathProduction/discover/movie?api_key=$apiKEY&page=3";
     Uri _uri = Uri.parse(path);
     http.Response response = await http.get(_uri);
 
