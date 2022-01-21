@@ -4,6 +4,7 @@ import 'package:flutter_codigo4_movieapp/models/movies_model.dart';
 import 'package:flutter_codigo4_movieapp/pages/movie_detail_page.dart';
 import 'package:flutter_codigo4_movieapp/services/api_services.dart';
 import 'package:flutter_codigo4_movieapp/ui/widgets/item_movie_list_widget.dart';
+import 'package:flutter_codigo4_movieapp/utils/constants.dart';
 import 'package:http/http.dart' as http;
 
 class HomePage extends StatefulWidget {
@@ -24,13 +25,35 @@ class _HomePageState extends State<HomePage> {
     // TODO: implement initState
     super.initState();
     _scrollController.addListener(() {
-      print(_scrollController.position.pixels);
-      print("dsdadadsfdsfd ${_scrollController.position.maxScrollExtent}");
-      if(_scrollController.position.pixels == _scrollController.position.maxScrollExtent){
-        print("Estamos en el final de la página");
+      //print(_scrollController.position.pixels);
+      //print("dsdadadsfdsfd ${_scrollController.position.maxScrollExtent}");
+
+      if(page >=1){
+        if(_scrollController.position.pixels == _scrollController.position.maxScrollExtent){
+          page++;
+          print(">= 1 $page");
+          setState(() {
+
+          });
+        }else if (page > 1){
+          if(_scrollController.position.pixels == _scrollController.position.minScrollExtent){
+            page--;
+            print("> 1 $page");
+            setState(() {
+
+            });
+          }
+        }
       }
     });
     //getData();
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    _scrollController.dispose();
   }
 
   /*getData() async {
