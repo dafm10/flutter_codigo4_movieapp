@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter_codigo4_movieapp/models/actor_model.dart';
 import 'package:flutter_codigo4_movieapp/models/movies_model.dart';
+import 'package:flutter_codigo4_movieapp/models/person_model.dart';
 import 'package:flutter_codigo4_movieapp/utils/constants.dart';
 import 'package:http/http.dart' as http;
 
@@ -29,12 +30,42 @@ class APIServices {
     String path = "$pathProduction/movie/$id/credits?api_key=$apiKEY";
     Uri _uri = Uri.parse(path);
     http.Response response = await http.get(_uri);
-    if(response.statusCode == 200){
+    if (response.statusCode == 200) {
       Map<String, dynamic> myMap = json.decode(response.body);
-      cast = myMap["cast"] != null ? myMap["cast"].map<ActorModel>((item)=>ActorModel.fromJson(item)).toList() : [];
+      cast = myMap["cast"] != null
+          ? myMap["cast"]
+              .map<ActorModel>((item) => ActorModel.fromJson(item))
+              .toList()
+          : [];
       return cast;
     }
     return cast;
+  }
+
+  Future<PersonModel> getPerson(int id) async {
+    String path = "$pathProduction/person/$id?api_key=$apiKEY";
+    Uri _uri = Uri.parse(path);
+    http.Response response = await http.get(_uri);
+    if (response.statusCode == 200) {
+      Map<String, dynamic> myMap = json.decode(response.body);
+      PersonModel person = PersonModel.fromJson(myMap);
+      print(myMap);
+      return person;
+    }
+    return PersonModel(
+        adult: false,
+        alsoKnownAs: [],
+        biography: "",
+        birthday: DateTime.parse('0000-00-00'),
+        gender: 0,
+        //homepage: "",
+        id: 0,
+        imdbId: "",
+        knownForDepartment: "",
+        name: "",
+        placeOfBirth: "",
+        popularity: 0,
+        profilePath: "");
   }
 
   Future<MovieModel> getMovie(int id) async {

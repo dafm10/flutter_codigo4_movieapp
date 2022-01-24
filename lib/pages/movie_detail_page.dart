@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_codigo4_movieapp/models/actor_model.dart';
 import 'package:flutter_codigo4_movieapp/models/movies_model.dart';
+import 'package:flutter_codigo4_movieapp/pages/person_detail_page.dart';
 import 'package:flutter_codigo4_movieapp/services/api_services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -209,37 +210,49 @@ class MovieDetailPage extends StatelessWidget {
                               child: Row(
                                 children: actoList
                                     .map(
-                                      (e) => Container(
-                                        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 0.0),
-                                        child: Column(
-                                          children: [
-                                            Container(
-                                              height: 100.0,
-                                              width: 100.0,
-                                              decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(
-                                                        60.0),
-                                                image: DecorationImage(
-                                                  image: e.profilePath != ""
-                                                      ? NetworkImage(
-                                                          "http://image.tmdb.org/t/p/w500${e.profilePath}")
-                                                      : const NetworkImage(
-                                                          "https://rrtltz.com/assets/images/team/placeholder.jpeg"),
-                                                  fit: BoxFit.cover,
+                                      (e) => GestureDetector(
+                                        onTap: (){
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) => PersonDetailPage(
+                                                id: e.id,
+                                              ),
+                                            ),
+                                          );
+                                        },
+                                        child: Container(
+                                          padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 0.0),
+                                          child: Column(
+                                            children: [
+                                              Container(
+                                                height: 100.0,
+                                                width: 100.0,
+                                                decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          60.0),
+                                                  image: DecorationImage(
+                                                    image: e.profilePath != ""
+                                                        ? NetworkImage(
+                                                            "http://image.tmdb.org/t/p/w500${e.profilePath}")
+                                                        : const NetworkImage(
+                                                            "https://rrtltz.com/assets/images/team/placeholder.jpeg"),
+                                                    fit: BoxFit.cover,
+                                                  ),
                                                 ),
                                               ),
-                                            ),
-                                            const SizedBox(height: 6.0,),
-                                            Text(
-                                              e.name,
-                                              maxLines: 2,
-                                              style: const TextStyle(
-                                                fontSize: 12.0,
-                                                color: Colors.white70,
+                                              const SizedBox(height: 6.0,),
+                                              Text(
+                                                e.name,
+                                                maxLines: 2,
+                                                style: const TextStyle(
+                                                  fontSize: 12.0,
+                                                  color: Colors.white70,
+                                                ),
                                               ),
-                                            ),
-                                          ],
+                                            ],
+                                          ),
                                         ),
                                       ),
                                     )
