@@ -19,6 +19,7 @@ class APIServices {
       movies = myMap["results"]
           .map<MovieModel>((item) => MovieModel.fromJson(item))
           .toList();
+      movies.addAll(<MovieModel>[].map((e) => e).toList());
       return movies;
       // 1er enlace base: http://image.tmdb.org/t/p/w500/
     }
@@ -49,7 +50,6 @@ class APIServices {
     if (response.statusCode == 200) {
       Map<String, dynamic> myMap = json.decode(response.body);
       PersonModel person = PersonModel.fromJson(myMap);
-      print(myMap);
       return person;
     }
     return PersonModel(
