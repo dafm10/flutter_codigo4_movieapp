@@ -26,6 +26,21 @@ class APIServices {
     return movies;
   }
 
+  Future<List<MovieModel>> getMovieGenre(int genre) async{
+    List<MovieModel> movies = [];
+    String path = "$pathProduction/discover/movie?api_key=$apiKEY&page=1&with_genres=$genre";
+    Uri _uri = Uri.parse(path);
+    http.Response response = await http.get(_uri);
+    //print(response.body);
+    if(response.statusCode == 200) {
+      Map<String, dynamic> myMap = json.decode(response.body);
+      movies = myMap["results"].map<MovieModel>((item) => MovieModel.fromJson(item)).toList();
+      //print(movies);
+      return movies;
+    }
+    return movies;
+  }
+
   Future<List<ActorModel>> getCastList(int id) async {
     List<ActorModel> cast = [];
     String path = "$pathProduction/movie/$id/credits?api_key=$apiKEY";

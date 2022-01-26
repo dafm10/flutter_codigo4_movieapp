@@ -7,6 +7,7 @@ class ItemMovieListWidget extends StatelessWidget {
   String overview;
   String img;
   Function onTap;
+  //int genre;
 
   ItemMovieListWidget({
     required this.title,
@@ -15,6 +16,7 @@ class ItemMovieListWidget extends StatelessWidget {
     required this.overview,
     required this.img,
     required this.onTap,
+   //required this.genre,
   });
 
   @override
