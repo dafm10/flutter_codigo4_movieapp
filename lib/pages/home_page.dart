@@ -6,7 +6,6 @@ import 'package:flutter_codigo4_movieapp/services/api_services.dart';
 import 'package:flutter_codigo4_movieapp/ui/widgets/item_filter_widget.dart';
 import 'package:flutter_codigo4_movieapp/ui/widgets/item_movie_list_widget.dart';
 import 'package:flutter_codigo4_movieapp/utils/constants.dart';
-import 'package:http/http.dart' as http;
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
